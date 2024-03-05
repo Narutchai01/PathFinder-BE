@@ -10,9 +10,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.loginUserController = void 0;
+const server_1 = require("../../server");
+const PasswordManager_1 = require("../../utils/PasswordManager");
 const loginUserController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        res.send("Login User");
+        const { email, password } = req.body;
+        const db = server_1.client.db("pathFinder");
+        const user = db.collection("user");
+        const findUser = yield user.findOne({ email: email });
+        if (!findUser) {
+            res.status(404).json({ message: "User not found!" });
+            return;
+        }
+        const isPasswordMatch = yield (0, PasswordManager_1.comparePassword)(password, findUser.password);
+        if (!isPasswordMatch) {
+            res.status(400).json({ message: "Invalid password!" });
+            return;
+        }
+        res.status(200).json({ message: "Successfully!" });
     }
     catch (error) {
         console.log(error);
