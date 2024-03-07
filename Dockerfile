@@ -12,4 +12,4 @@ COPY ./dist /usr/src/app/dist
 
 EXPOSE 8080
 
-CMD [ "node", "server.js" ]
+CMD [ "node", "--watch"  ,"./dist/server.js" ]

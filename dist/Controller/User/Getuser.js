@@ -13,7 +13,7 @@ exports.getUser = void 0;
 const UserSchema_1 = require("../../Model/UserSchema");
 const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const user = yield UserSchema_1.UserModel.find();
+        const user = yield UserSchema_1.UserModel.find({});
         res.status(200).json(user);
     }
     catch (error) {
