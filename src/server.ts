@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import { PORT, MONGO_URI } from "./config/config";
 import userRouter from "./Routers/userRouter";
+import adminRouter from "./Routers/adminRouter";
 import mongoose from "mongoose";
 
 //define variable
@@ -20,6 +21,7 @@ app.get("/", async (req, res) => {
 
 //Router zone
 app.use("/api/user", userRouter);
+app.use("/api/admin", adminRouter);
 
 app.listen(PORT, async () => {
   try {

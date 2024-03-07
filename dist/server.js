@@ -17,6 +17,7 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const config_1 = require("./config/config");
 const userRouter_1 = __importDefault(require("./Routers/userRouter"));
+const adminRouter_1 = __importDefault(require("./Routers/adminRouter"));
 const mongoose_1 = __importDefault(require("mongoose"));
 //define variable
 const app = (0, express_1.default)();
@@ -30,6 +31,7 @@ app.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 }));
 //Router zone
 app.use("/api/user", userRouter_1.default);
+app.use("/api/admin", adminRouter_1.default);
 app.listen(config_1.PORT, () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield mongoose_1.default.connect(config_1.MONGO_URI);
