@@ -36,10 +36,10 @@ app.use("/api/user", userRouter_1.default);
 app.use("/api/admin", adminRouter_1.default);
 app.listen(config_1.PORT, () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield mongoose_1.default.connect(config_1.MONGO_URI);
+        yield mongoose_1.default.connect(config_1.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
         console.log(`Server is running at http://localhost:${config_1.PORT}`);
     }
     catch (error) {
-        console.log("Error on server", error.message);
+        console.log("server error");
     }
 }));

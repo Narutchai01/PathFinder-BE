@@ -28,9 +28,9 @@ app.use("/api/admin", adminRouter);
 
 app.listen(PORT, async () => {
   try {
-    await mongoose.connect(MONGO_URI);
+    await mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true } as mongoose.ConnectOptions);
     console.log(`Server is running at http://localhost:${PORT}`);
   } catch (error: any) {
-    console.log("Error on server", error.message);
+    console.log("server error");
   }
 });
