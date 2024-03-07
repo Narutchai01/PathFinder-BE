@@ -10,16 +10,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.registerController = void 0;
-const server_1 = require("../../server");
-const uuidv4_1 = require("uuidv4");
+const UserSchema_1 = require("../../Model/UserSchema");
 const PasswordManager_1 = require("../../utils/PasswordManager");
 const registerController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { username, password, firstname, lastname, school, education_level, birthdate, email } = req.body;
-        const db = server_1.client.db("pathFinder");
-        const user = db.collection("user");
-        const registerData = {
-            userID: (0, uuidv4_1.uuid)(),
+        const { username, password, email, firstname, lastname, school, education_level, birhDate, } = req.body;
+        const user = new UserSchema_1.UserModel({
             username,
             password: yield (0, PasswordManager_1.hashPassword)(password),
             email,
@@ -27,13 +23,13 @@ const registerController = (req, res) => __awaiter(void 0, void 0, void 0, funct
             lastname,
             school,
             education_level,
-            birthdate,
-        };
-        yield user.insertOne(registerData);
-        res.status(200).json({ message: "Successfully!" });
+            birhDate,
+        });
+        yield user.save();
+        res.status(201).send("User Created");
     }
     catch (error) {
-        console.log(error);
+        console.log("Error on registerController", error.message);
     }
 });
 exports.registerController = registerController;
