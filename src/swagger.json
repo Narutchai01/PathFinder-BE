@@ -101,6 +101,17 @@
         }
       }
     },
+    "/api/user/getuser" : {
+      "get": {
+        "summary": "get user",
+        "description": "get user",
+        "responses": {
+          "200": {
+            "description": "get user"
+          }
+        }
+      }
+    },
     "/api/admin": {
       "get": {
         "summary": "Returns a list of  admin",
