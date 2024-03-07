@@ -26,7 +26,10 @@ const registerController = (req, res) => __awaiter(void 0, void 0, void 0, funct
             birhDate,
         });
         yield user.save();
-        res.status(201).send("User Created");
+        res.status(200).send({
+            message: "User created successfully",
+            user,
+        });
     }
     catch (error) {
         console.log("Error on registerController", error.message);

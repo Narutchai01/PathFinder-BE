@@ -5,11 +5,11 @@ import { PORT, MONGO_URI } from "./config/config";
 import userRouter from "./Routers/userRouter";
 import adminRouter from "./Routers/adminRouter";
 import mongoose from "mongoose";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "./swagger.json";
 
 //define variable
 const app = express();
-
-//use zone
 app.use(cors());
 app.use(express.json());
 
@@ -18,6 +18,9 @@ app.get("/", async (req, res) => {
     message: "Hello World",
   });
 });
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 
 //Router zone
 app.use("/api/user", userRouter);

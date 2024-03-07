@@ -25,7 +25,10 @@ export const registerController = async (req: Request, res: Response) => {
       birhDate,
     });
     await user.save();
-    res.status(201).send("User Created");
+    res.status(200).send({
+      message: "User created successfully",
+      user,
+    });
   } catch (error: any) {
     console.log("Error on registerController", error.message);
   }

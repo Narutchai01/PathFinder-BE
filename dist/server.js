@@ -19,9 +19,10 @@ const config_1 = require("./config/config");
 const userRouter_1 = __importDefault(require("./Routers/userRouter"));
 const adminRouter_1 = __importDefault(require("./Routers/adminRouter"));
 const mongoose_1 = __importDefault(require("mongoose"));
+const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
+const swagger_json_1 = __importDefault(require("./swagger.json"));
 //define variable
 const app = (0, express_1.default)();
-//use zone
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -29,6 +30,7 @@ app.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         message: "Hello World",
     });
 }));
+app.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swagger_json_1.default));
 //Router zone
 app.use("/api/user", userRouter_1.default);
 app.use("/api/admin", adminRouter_1.default);

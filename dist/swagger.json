@@ -1,0 +1,116 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Sample API",
+        "description": "Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080",
+            "description": "Optional server description, e.g. Main (production) server"
+        },
+        {
+            "url": "http://staging-api.example.com",
+            "description": "Optional server description, e.g. Internal staging server for testing"
+        }
+    ],
+    "paths": {
+        "/api/user": {
+            "get": {
+                "summary": "Returns a list of users.",
+                "description": "Optional extended description in CommonMark or HTML.",
+                "responses": {
+                    "200": {
+                        "description": "root api route user"
+                    }
+                }
+            }
+        },
+        "/api/user/register": {
+            "post": {
+                "summary": "register user",
+                "description": "register user",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "firstname": {
+                                        "type": "string"
+                                    },
+                                    "lastname": {
+                                        "type": "string"
+                                    },
+                                    "school": {
+                                        "type": "string"
+                                    },
+                                    "education_level": {
+                                        "type": "string"
+                                    },
+                                    "birthDate": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "register user"
+                    }
+                }
+            }
+        },
+        "/api/user/login": {
+            "post": {
+                "summary": "login user",
+                "description": "login user",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "login user"
+                    }
+                }
+            }
+        },
+        "/api/admin": {
+            "get": {
+                "summary": "Returns a list of  admin",
+                "description": "root api route admin",
+                "responses": {
+                    "200": {
+                        "description": "hello"
+                    }
+                }
+            }
+        }
+    }
+}
