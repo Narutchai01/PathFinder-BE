@@ -5,7 +5,8 @@ import { UserInterface } from "../interface/Model";
 const User = new Schema<UserInterface>({
     username: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     password: {
         type: String,
@@ -13,7 +14,8 @@ const User = new Schema<UserInterface>({
     },
     email : {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     firstname : {
         type: String,
