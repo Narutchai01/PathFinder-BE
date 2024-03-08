@@ -24,4 +24,5 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=
       - MONGO_INITDB_ROOT_PASSWORD=
     volumes:
-      - ./mongoDB:/var/lib/mongo
+      - ./data:/data/db
+    
