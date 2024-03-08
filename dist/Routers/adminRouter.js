@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const addJob_1 = require("../Controller/Admin/Job/addJob");
 const GetJob_1 = require("../Controller/Admin/Job/GetJob");
+const Editejob_1 = require("../Controller/Admin/Job/Editejob");
 const router = express_1.default.Router();
 router.get("/", (req, res) => {
     res.send({
@@ -13,6 +14,7 @@ router.get("/", (req, res) => {
     });
 });
 // job router
-router.post("/job", addJob_1.addJob);
-router.get("/job", GetJob_1.getJob);
+router.post("/job/addjob", addJob_1.addJob);
+router.get("/job/getjob", GetJob_1.getJob);
+router.put("/job/editjob/:jobid", Editejob_1.Editejob);
 exports.default = router;

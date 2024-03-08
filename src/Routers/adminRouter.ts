@@ -1,6 +1,7 @@
 import express from 'express';
 import { addJob } from '../Controller/Admin/Job/addJob';
 import { getJob } from '../Controller/Admin/Job/GetJob';
+import { Editejob } from '../Controller/Admin/Job/Editejob';
 
 const router = express.Router();
 
@@ -12,8 +13,9 @@ router.get("/", (req, res) => {
 });
 
 // job router
-router.post("/job",addJob);
-router.get("/job",getJob);
+router.post("/job/addjob",addJob);
+router.get("/job/getjob",getJob);
+router.put("/job/editjob/:jobid",Editejob);
 
 
 

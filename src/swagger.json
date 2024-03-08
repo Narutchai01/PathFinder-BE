@@ -118,6 +118,75 @@
           }
         }
       }
+    },
+    "/api/admin/job/addjob" : {
+      "post": {
+        "summary": "add job",
+        "description": "add job",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "jobTitle": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "add job"
+          }
+        }
+      }
+    },
+    "/api/admin/job/getjob" : {
+      "get": {
+        "summary": "get job",
+        "description": "get job",
+        "responses": {
+          "200": {
+            "description": "get job"
+          }
+        }
+      }
+    },
+    "api/admin/job/editjob/:jobid" : {
+      "put": {
+        "summary": "edit job",
+        "description": "edit job",
+        "pameters": {
+          "name": "jobiddasdasdas dasdasd",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "jobTitle": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "edit job"
+          }
+        }
+      }
     }
   }
 }
