@@ -6,7 +6,6 @@ import { getUser } from '../Controller/User/Getuser';
 const router = express.Router();
 
 
-// router.get("/login", loginUserController);
 
 router.get("/", (req, res) => {
     res.send({

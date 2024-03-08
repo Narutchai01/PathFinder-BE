@@ -8,7 +8,6 @@ const RegisterController_1 = require("../Controller/User/RegisterController");
 const LoginUserController_1 = require("../Controller/User/LoginUserController");
 const Getuser_1 = require("../Controller/User/Getuser");
 const router = express_1.default.Router();
-// router.get("/login", loginUserController);
 router.get("/", (req, res) => {
     res.send({
         message: "this is user router",
