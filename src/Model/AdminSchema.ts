@@ -38,10 +38,6 @@ const Weight = new Schema<WeightInterface>({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Job"
     },
-    choiseID : {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Choies"
-    },
     weight: Number
 });
 

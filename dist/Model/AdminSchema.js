@@ -52,10 +52,6 @@ const Weight = new mongoose_1.Schema({
         type: mongoose_1.default.Schema.Types.ObjectId,
         ref: "Job"
     },
-    choiseID: {
-        type: mongoose_1.default.Schema.Types.ObjectId,
-        ref: "Choies"
-    },
     weight: Number
 });
 exports.WeightModel = (0, mongoose_1.model)("Weight", Weight);
