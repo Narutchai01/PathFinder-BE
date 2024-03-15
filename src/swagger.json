@@ -97,7 +97,7 @@
         }
       }
     },
-    "/api/user/getuser" : {
+    "/api/user/getuser": {
       "get": {
         "summary": "get user",
         "description": "get user",
@@ -119,7 +119,7 @@
         }
       }
     },
-    "/api/admin/job/addjob" : {
+    "/api/admin/job/addjob": {
       "post": {
         "summary": "add job",
         "description": "add job",
@@ -144,7 +144,7 @@
         }
       }
     },
-    "/api/admin/job/getjob" : {
+    "/api/admin/job/getjob": {
       "get": {
         "summary": "get job",
         "description": "get job",
@@ -155,18 +155,20 @@
         }
       }
     },
-    "api/admin/job/editjob/:jobid" : {
+    "/api/admin/job/editjob/:jobid": {
       "put": {
         "summary": "edit job",
         "description": "edit job",
-        "pameters": {
-          "name": "jobiddasdasdas dasdasd",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
+        "parameters": [
+          {
+            "name": "jobid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
-        },
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -184,6 +186,91 @@
         "responses": {
           "200": {
             "description": "edit job"
+          }
+        }
+      }
+    },
+    "/api/admin/quizz/create": {
+      "post": {
+        "summary": "create quizz",
+        "description": "create quizz",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "quizzTitle": {
+                    "type": "string"
+                  },
+                  "questions": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "title": {
+                          "type": "string"
+                        },
+                        "weight": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "jobID": {
+                                "type": "string"
+                              },
+                              "weight": {
+                                "type": "number"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "create quizz"
+          }
+        }
+      }
+    },
+    "/api/admin/quizz/editquizz/:quizzID" : {
+      "put" : {
+        "summary" : "edit quizz",
+        "description" : "edit quizz",
+        "parameters" : [
+          {
+            "name" : "quizzID",
+            "in" : "path",
+            "required" : true,
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                  "properties" : {
+                    "quizzTitle" : {
+                      "type" : "string"
+                    }
+                  }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "edit quizz"
           }
         }
       }

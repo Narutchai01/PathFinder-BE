@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserModel = void 0;
+exports.CommentModel = exports.PostModel = exports.UserModel = void 0;
 const mongoose_1 = require("mongoose");
 const User = new mongoose_1.Schema({
     username: {
@@ -30,3 +30,35 @@ const User = new mongoose_1.Schema({
     birhDate: Date,
 });
 exports.UserModel = (0, mongoose_1.model)("User", User);
+const Post = new mongoose_1.Schema({
+    PostTitle: {
+        type: String,
+        required: true
+    },
+    OwnerID: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: "User"
+    },
+    Comments: [
+        {
+            type: mongoose_1.Schema.Types.ObjectId,
+            ref: "Comment"
+        }
+    ]
+});
+exports.PostModel = (0, mongoose_1.model)("Post", Post);
+const Comment = new mongoose_1.Schema({
+    comment: {
+        type: String,
+        required: true
+    },
+    PostID: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: "Post"
+    },
+    OwnerID: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: "User"
+    }
+});
+exports.CommentModel = (0, mongoose_1.model)("Comment", Comment);

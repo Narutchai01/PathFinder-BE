@@ -31,3 +31,15 @@ export interface WeightInterface {
     choiseID: ObjectId;
     weight: number;
 }
+
+export interface PostInterface {
+    PostTitle: string;
+    OwnerID: ObjectId;
+    Comments: ObjectId[];
+}
+
+export interface CommentInterface {
+    comment: string;
+    PostID: ObjectId;
+    OwnerID: ObjectId;
+}

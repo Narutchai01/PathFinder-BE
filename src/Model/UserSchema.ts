@@ -1,5 +1,5 @@
 import { Schema ,model} from "mongoose";
-import { UserInterface } from "../interface/Model";
+import { CommentInterface, PostInterface, UserInterface } from "../interface/Model";
 
 
 const User = new Schema<UserInterface>({
@@ -31,3 +31,40 @@ const User = new Schema<UserInterface>({
 });
 
 export const UserModel = model<UserInterface>("User", User);
+
+
+const Post = new Schema<PostInterface>({
+    PostTitle: {
+        type: String,
+        required: true
+    },
+    OwnerID : {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    },
+    Comments : [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Comment"
+        }
+    ]
+});
+
+export const PostModel = model("Post", Post);
+
+const Comment = new Schema<CommentInterface>({
+    comment: {
+        type: String,
+        required: true
+    },
+    PostID : {
+        type: Schema.Types.ObjectId,
+        ref: "Post"
+    },
+    OwnerID : {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    }
+});
+
+export const CommentModel = model("Comment", Comment);
