@@ -7,6 +7,7 @@ import adminRouter from "./Routers/adminRouter";
 import mongoose from "mongoose";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./swagger.json";
+import cookieParser from "cookie-parser";
 
 //define variable
 const app = express();
@@ -16,6 +17,7 @@ app.use(cors(
     credentials: true,
   }
 ));
+app.use(cookieParser());
 app.use(express.json());
 
 app.get("/", async (req, res) => {

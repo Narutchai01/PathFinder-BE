@@ -23,8 +23,13 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.WeightModel = exports.ChoiseModel = exports.QuizzModel = exports.JobModel = void 0;
+exports.WeightModel = exports.ChoiseModel = exports.QuizzModel = exports.JobModel = exports.AdminModel = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
+const Admin = new mongoose_1.Schema({
+    username: String,
+    password: String
+});
+exports.AdminModel = (0, mongoose_1.model)("Admin", Admin);
 const Job = new mongoose_1.Schema({
     jobTitle: String
 });

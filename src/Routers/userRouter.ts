@@ -9,6 +9,8 @@ import { GetPost } from '../Controller/User/Post/GetPost';
 import { GetPostByPostID } from '../Controller/User/Post/GetPostByPostID';
 import { DeleletPost } from '../Controller/User/Post/DeleletPost';
 import { DeleletComment } from '../Controller/User/Post/DeleletComment';
+import { validateToken } from '../middleware/auth';
+import { LogOut } from '../Controller/User/๊user/LogOut';
 
 const router = express.Router();
 
@@ -21,7 +23,8 @@ router.get("/", (req, res) => {
 });
 router.post("/register",registerController);
 router.post("/login",LoginUserController);
-router.get("/getuser", getUser);
+router.get("/logout", LogOut);
+router.get("/getuser", validateToken,getUser);
 router.get("/quizz/getquizz", GetQuizz);
 
 // Post Router

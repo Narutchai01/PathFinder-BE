@@ -8,10 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LoginUserController = void 0;
 const UserSchema_1 = require("../../../Model/UserSchema");
 const PasswordManager_1 = require("../../../utils/PasswordManager");
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const config_1 = require("../../../config/config");
 const LoginUserController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, password } = req.body;
@@ -23,7 +28,9 @@ const LoginUserController = (req, res) => __awaiter(void 0, void 0, void 0, func
         if (!isPasswordValid) {
             return res.status(400).json({ message: "Invalid Password" });
         }
-        res.status(200).json({ message: "Login Success" });
+        const payload = jsonwebtoken_1.default.sign({ UserID: user._id }, String(config_1.secret_jwt), { algorithm: "HS256" });
+        res.cookie("token", payload, { httpOnly: true });
+        res.status(200).json({ message: "Login Success", payload: payload });
     }
     catch (error) {
         console.log(error.message);

@@ -43,3 +43,7 @@ export interface CommentInterface {
     PostID: ObjectId;
     OwnerID: ObjectId;
 }
+
+export interface PayLoadUser {
+    UserID : string;
+}

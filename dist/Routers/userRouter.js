@@ -14,6 +14,8 @@ const GetPost_1 = require("../Controller/User/Post/GetPost");
 const GetPostByPostID_1 = require("../Controller/User/Post/GetPostByPostID");
 const DeleletPost_1 = require("../Controller/User/Post/DeleletPost");
 const DeleletComment_1 = require("../Controller/User/Post/DeleletComment");
+const auth_1 = require("../middleware/auth");
+const LogOut_1 = require("../Controller/User/\u0E4Auser/LogOut");
 const router = express_1.default.Router();
 router.get("/", (req, res) => {
     res.send({
@@ -22,7 +24,8 @@ router.get("/", (req, res) => {
 });
 router.post("/register", RegisterController_1.registerController);
 router.post("/login", LoginUserController_1.LoginUserController);
-router.get("/getuser", Getuser_1.getUser);
+router.get("/logout", LogOut_1.LogOut);
+router.get("/getuser", auth_1.validateToken, Getuser_1.getUser);
 router.get("/quizz/getquizz", GetQuizz_1.GetQuizz);
 // Post Router
 router.post("/post/createpost", CreatePost_1.CreatePost);

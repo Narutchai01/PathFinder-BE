@@ -3,6 +3,13 @@ import { ChoiseInterface, JobInterface, QuizzInterface, WeightInterface } from "
 
 
 
+const Admin = new Schema({
+    username: String,
+    password: String
+});
+
+export const AdminModel = model("Admin", Admin);
+
 const Job = new Schema<JobInterface>({
     jobTitle: String
 });
