@@ -5,6 +5,7 @@ import { getUser } from '../Controller/User/๊user/Getuser';
 import { GetQuizz } from '../Controller/User/Quizz/GetQuizz';
 import { CreatePost } from '../Controller/User/Post/CreatePost';
 import { CreateComment } from '../Controller/User/Post/CreateComment';
+import { GetPost } from '../Controller/User/Post/GetPost';
 
 const router = express.Router();
 
@@ -23,6 +24,7 @@ router.get("/quizz/getquizz", GetQuizz);
 // Post Router
 router.post("/post/createpost", CreatePost);
 router.post("/post/createcomment", CreateComment);
+router.get("/post/getpost", GetPost)
 
 
 

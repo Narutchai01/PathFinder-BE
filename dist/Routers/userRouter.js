@@ -10,6 +10,7 @@ const Getuser_1 = require("../Controller/User/\u0E4Auser/Getuser");
 const GetQuizz_1 = require("../Controller/User/Quizz/GetQuizz");
 const CreatePost_1 = require("../Controller/User/Post/CreatePost");
 const CreateComment_1 = require("../Controller/User/Post/CreateComment");
+const GetPost_1 = require("../Controller/User/Post/GetPost");
 const router = express_1.default.Router();
 router.get("/", (req, res) => {
     res.send({
@@ -23,4 +24,5 @@ router.get("/quizz/getquizz", GetQuizz_1.GetQuizz);
 // Post Router
 router.post("/post/createpost", CreatePost_1.CreatePost);
 router.post("/post/createcomment", CreateComment_1.CreateComment);
+router.get("/post/getpost", GetPost_1.GetPost);
 exports.default = router;
