@@ -7,6 +7,8 @@ import { CreatePost } from '../Controller/User/Post/CreatePost';
 import { CreateComment } from '../Controller/User/Post/CreateComment';
 import { GetPost } from '../Controller/User/Post/GetPost';
 import { GetPostByPostID } from '../Controller/User/Post/GetPostByPostID';
+import { DeleletPost } from '../Controller/User/Post/DeleletPost';
+import { DeleletComment } from '../Controller/User/Post/DeleletComment';
 
 const router = express.Router();
 
@@ -27,6 +29,8 @@ router.post("/post/createpost", CreatePost);
 router.post("/post/createcomment", CreateComment);
 router.get("/post/getpost", GetPost)
 router.get("/post/getpostbyid", GetPostByPostID)
+router.delete("/post/deletepost", DeleletPost)
+router.delete("/post/deletecomment", DeleletComment)
 
 
 

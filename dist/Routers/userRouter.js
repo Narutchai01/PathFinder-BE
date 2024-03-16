@@ -12,6 +12,8 @@ const CreatePost_1 = require("../Controller/User/Post/CreatePost");
 const CreateComment_1 = require("../Controller/User/Post/CreateComment");
 const GetPost_1 = require("../Controller/User/Post/GetPost");
 const GetPostByPostID_1 = require("../Controller/User/Post/GetPostByPostID");
+const DeleletPost_1 = require("../Controller/User/Post/DeleletPost");
+const DeleletComment_1 = require("../Controller/User/Post/DeleletComment");
 const router = express_1.default.Router();
 router.get("/", (req, res) => {
     res.send({
@@ -27,4 +29,6 @@ router.post("/post/createpost", CreatePost_1.CreatePost);
 router.post("/post/createcomment", CreateComment_1.CreateComment);
 router.get("/post/getpost", GetPost_1.GetPost);
 router.get("/post/getpostbyid", GetPostByPostID_1.GetPostByPostID);
+router.delete("/post/deletepost", DeleletPost_1.DeleletPost);
+router.delete("/post/deletecomment", DeleletComment_1.DeleletComment);
 exports.default = router;
