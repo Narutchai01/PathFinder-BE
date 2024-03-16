@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { PostModel, CommentModel } from "../../../Model/UserSchema";
+import { PostModel} from "../../../Model/UserSchema";
 
 export const GetPost = async (_req: Request, res: Response) => {
     try {
