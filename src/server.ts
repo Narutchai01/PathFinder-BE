@@ -8,12 +8,13 @@ import mongoose from "mongoose";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./swagger.json";
 import cookieParser from "cookie-parser";
+import { validateToken } from "./middleware/auth";
 
 //define variable
 const app = express();
 app.use(cors(
   {
-    origin: '*',
+    origin: "http://localhost:3000",
     credentials: true,
   }
 ));
@@ -31,7 +32,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //Router zone
 app.use("/api/user", userRouter);
-app.use("/api/admin", adminRouter);
+app.use("/api/admin",adminRouter);
 
 app.listen(PORT, async () => {
   try {
