@@ -11,6 +11,7 @@ import { DeleletPost } from '../Controller/User/Post/DeleletPost';
 import { DeleletComment } from '../Controller/User/Post/DeleletComment';
 import { validateToken } from '../middleware/auth';
 import { LogOut } from '../Controller/User/๊user/LogOut';
+import { Predict } from '../Controller/User/Quizz/Predict';
 
 const router = express.Router();
 
@@ -25,7 +26,6 @@ router.post("/register",registerController);
 router.post("/login",LoginUserController);
 router.get("/logout", LogOut);
 router.get("/getuser", validateToken,getUser);
-router.get("/quizz/getquizz", GetQuizz);
 
 // Post Router
 router.post("/post/createpost", CreatePost);
@@ -34,6 +34,11 @@ router.get("/post/getpost", GetPost)
 router.get("/post/getpostbyid", GetPostByPostID)
 router.delete("/post/deletepost", DeleletPost)
 router.delete("/post/deletecomment", DeleletComment)
+
+
+// Quizz Router
+router.get("/quizz/getquizz", GetQuizz);
+router.post("/quizz/predict",Predict);
 
 
 
