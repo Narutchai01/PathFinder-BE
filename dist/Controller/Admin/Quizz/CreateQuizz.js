@@ -11,11 +11,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateQuizz = void 0;
 const AdminSchema_1 = require("../../../Model/AdminSchema");
+const UploadImage_1 = require("../../../utils/UploadImage");
 const CreateQuizz = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { quizzTitle, questions } = req.body;
+        let { data } = req.body;
+        data = JSON.parse(data);
+        const { quizzTitle, questions } = data;
+        const file = req.file;
+        if (!file) {
+            return res.status(400).json("Please upload a file");
+        }
+        const imageUrl = yield (0, UploadImage_1.uploadImageQuizz)(file);
         const quizz = new AdminSchema_1.QuizzModel({
             quizzTitle,
+            ImageQuizz: imageUrl,
         });
         yield quizz.save();
         const questionsData = yield Promise.all(questions.map((question) => __awaiter(void 0, void 0, void 0, function* () {

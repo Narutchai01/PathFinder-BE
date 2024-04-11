@@ -27,7 +27,7 @@ export interface JobInterface {
 export interface QuizzInterface {
     quizzTitle: string;
     choies: string[];
-    Image : string;
+    ImageQuizz : string;
 }
 
 export interface ChoiseInterface {

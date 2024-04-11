@@ -5,11 +5,21 @@ import {
   ChoiseModel,
 } from "../../../Model/AdminSchema";
 
+import { uploadImageQuizz } from "../../../utils/UploadImage";
+
 export const CreateQuizz = async (req: Request, res: Response) => {
   try {
-    const { quizzTitle, questions } = req.body;
+    let { data } = req.body;
+    data = JSON.parse(data);
+    const { quizzTitle, questions } = data;
+    const file = req.file;
+    if (!file) {
+      return res.status(400).json("Please upload a file");
+    }
+    const imageUrl = await uploadImageQuizz(file);
     const quizz = new QuizzModel({
       quizzTitle,
+      ImageQuizz: imageUrl,
     });
     await quizz.save();
 

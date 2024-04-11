@@ -28,6 +28,7 @@ export const JobModel = model("Job", Job);
 
 const Quizz = new Schema<QuizzInterface>({
     quizzTitle: String,
+    ImageQuizz : String,
     choies: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Choies"

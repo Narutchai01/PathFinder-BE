@@ -45,6 +45,7 @@ const Job = new mongoose_1.Schema({
 exports.JobModel = (0, mongoose_1.model)("Job", Job);
 const Quizz = new mongoose_1.Schema({
     quizzTitle: String,
+    ImageQuizz: String,
     choies: [{
             type: mongoose_1.default.Schema.Types.ObjectId,
             ref: "Choies"
