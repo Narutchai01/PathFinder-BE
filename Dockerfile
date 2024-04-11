@@ -1,4 +1,4 @@
-FROM node:20.10.0
+FROM node:20.10.0-alpine
 
 
 WORKDIR /usr/src/app
@@ -10,6 +10,5 @@ RUN npm install
 COPY ./dist /usr/src/app/dist
 
 
-EXPOSE 8080
 
 CMD [ "node", "--watch"  ,"./dist/server.js" ]
