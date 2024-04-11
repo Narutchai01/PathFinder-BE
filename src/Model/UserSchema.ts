@@ -47,7 +47,9 @@ const Post = new Schema<PostInterface>({
             type: Schema.Types.ObjectId,
             ref: "Comment"
         }
-    ]
+    ],
+    PostImage : String,
+    descriptionPost : String
 });
 
 export const PostModel = model("Post", Post);

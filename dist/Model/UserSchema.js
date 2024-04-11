@@ -44,7 +44,9 @@ const Post = new mongoose_1.Schema({
             type: mongoose_1.Schema.Types.ObjectId,
             ref: "Comment"
         }
-    ]
+    ],
+    PostImage: String,
+    descriptionPost: String
 });
 exports.PostModel = (0, mongoose_1.model)("Post", Post);
 const Comment = new mongoose_1.Schema({

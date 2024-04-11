@@ -45,7 +45,8 @@ export interface PostInterface {
     PostTitle: string;
     OwnerID: ObjectId;
     Comments: ObjectId[];
-    Image : string;
+    PostImage : string;
+    descriptionPost : string;
 }
 
 export interface CommentInterface {
