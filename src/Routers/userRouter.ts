@@ -38,7 +38,7 @@ router.delete("/post/deletecomment", DeleletComment)
 
 // Quizz Router
 router.get("/quizz/getquizz", GetQuizz);
-router.post("/quizz/predict",Predict);
+router.post("/quizz/predict",validateToken,Predict);
 
 
 

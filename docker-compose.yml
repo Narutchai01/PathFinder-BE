@@ -6,12 +6,11 @@ services:
     command: node --watch ./dist/server.js
     build: .
     restart: always
-    ports:
-      - ${PORT}:${PORT}
     env_file:
       - .env
     environment:
       - PORT=${PORT}
+      - MONG_URI=${MONG_URI}
     depends_on:
       - mongo
 

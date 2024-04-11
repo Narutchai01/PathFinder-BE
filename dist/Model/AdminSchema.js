@@ -31,7 +31,16 @@ const Admin = new mongoose_1.Schema({
 });
 exports.AdminModel = (0, mongoose_1.model)("Admin", Admin);
 const Job = new mongoose_1.Schema({
-    jobTitle: String
+    jobTitle: String,
+    description: String,
+    OneDayDo: [String],
+    skills: [
+        {
+            skill: String,
+            descriptoionskill: String
+        }
+    ],
+    Image: String
 });
 exports.JobModel = (0, mongoose_1.model)("Job", Job);
 const Quizz = new mongoose_1.Schema({

@@ -11,16 +11,27 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.addJob = void 0;
 const AdminSchema_1 = require("../../../Model/AdminSchema");
+const UploadImage_1 = require("../../../utils/UploadImage");
 const addJob = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { jobTitle } = req.body;
+        const { data } = req.body;
+        const file = req.file;
+        if (!file) {
+            return res.status(400).json({ message: "Please upload a file" });
+        }
+        const imageUrl = yield (0, UploadImage_1.uploadImageJob)(file);
+        const newData = JSON.parse(data);
         const job = new AdminSchema_1.JobModel({
-            jobTitle,
+            jobTitle: newData.jobTitle,
+            description: newData.description,
+            OneDayDo: newData.OneDayDo,
+            skills: newData.skills,
+            Image: imageUrl
         });
         yield job.save();
-        res.status(201).json({
+        res.status(201).send({
             message: "Job added successfully",
-            job,
+            job
         });
     }
     catch (error) {

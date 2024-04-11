@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CommentModel = exports.PostModel = exports.UserModel = void 0;
+exports.ResultModel = exports.CommentModel = exports.PostModel = exports.UserModel = void 0;
 const mongoose_1 = require("mongoose");
 const User = new mongoose_1.Schema({
     username: {
@@ -62,3 +62,14 @@ const Comment = new mongoose_1.Schema({
     }
 });
 exports.CommentModel = (0, mongoose_1.model)("Comment", Comment);
+const Result = new mongoose_1.Schema({
+    jobID: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: "Job"
+    },
+    userID: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: "User"
+    },
+});
+exports.ResultModel = (0, mongoose_1.model)("Result", Result);

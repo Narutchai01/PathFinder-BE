@@ -1,5 +1,5 @@
 import { Schema ,model} from "mongoose";
-import { CommentInterface, PostInterface, UserInterface } from "../interface/Model";
+import { CommentInterface, PostInterface, UserInterface ,ResultInterface } from "../interface/Model";
 
 
 const User = new Schema<UserInterface>({
@@ -68,3 +68,19 @@ const Comment = new Schema<CommentInterface>({
 });
 
 export const CommentModel = model("Comment", Comment);
+
+
+const Result = new Schema<ResultInterface>(
+    {
+        jobID: {
+            type: Schema.Types.ObjectId,
+            ref: "Job"
+        },
+        userID : {
+            type: Schema.Types.ObjectId,
+            ref: "User"
+        },
+    }
+);
+
+export const ResultModel = model("Result", Result);

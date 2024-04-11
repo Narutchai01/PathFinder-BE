@@ -11,7 +11,16 @@ const Admin = new Schema({
 export const AdminModel = model("Admin", Admin);
 
 const Job = new Schema<JobInterface>({
-    jobTitle: String
+    jobTitle: String,
+    description: String,
+    OneDayDo : [String],
+    skills: [
+        {
+            skill: String,
+            descriptoionskill: String
+        }
+    ],
+    Image : String
 });
 
 export const JobModel = model("Job", Job);

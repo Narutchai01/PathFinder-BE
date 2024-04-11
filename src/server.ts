@@ -8,7 +8,7 @@ import mongoose from "mongoose";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./swagger.json";
 import cookieParser from "cookie-parser";
-import { validateToken } from "./middleware/auth";
+import multer from "multer";
 
 //define variable
 const app = express();
@@ -20,6 +20,12 @@ app.use(cors(
 ));
 app.use(cookieParser());
 app.use(express.json());
+
+const multerMid = multer({
+  storage: multer.memoryStorage(),
+});
+
+app.use(multerMid.single("file"));
 
 app.get("/", async (req, res) => {
   res.send({
@@ -36,7 +42,7 @@ app.use("/api/admin",adminRouter);
 
 app.listen(PORT, async () => {
   try {
-    await mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true } as mongoose.ConnectOptions);
+    await mongoose.connect(MONGO_URI);
     console.log(`Server is running at http://localhost:${PORT}`);
   } catch (error: any) {
     console.log("server error");
