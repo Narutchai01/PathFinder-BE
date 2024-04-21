@@ -24,7 +24,7 @@ router.get("/", (req, res) => {
     });
 });
 router.post("/register", RegisterController_1.registerController);
-router.post("/login", LoginUserController_1.LoginUserController);
+router.post("/login", auth_1.isLogin, LoginUserController_1.LoginUserController);
 router.get("/logout", LogOut_1.LogOut);
 router.get("/getuser", auth_1.validateToken, Getuser_1.getUser);
 // Post Router

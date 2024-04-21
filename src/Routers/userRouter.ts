@@ -9,7 +9,7 @@ import { GetPost } from '../Controller/User/Post/GetPost';
 import { GetPostByPostID } from '../Controller/User/Post/GetPostByPostID';
 import { DeleletPost } from '../Controller/User/Post/DeleletPost';
 import { DeleletComment } from '../Controller/User/Post/DeleletComment';
-import { validateToken } from '../middleware/auth';
+import { isLogin, validateToken } from '../middleware/auth';
 import { LogOut } from '../Controller/User/๊user/LogOut';
 import { Predict } from '../Controller/User/Quizz/Predict';
 
@@ -23,7 +23,7 @@ router.get("/", (req, res) => {
     });
 });
 router.post("/register",registerController);
-router.post("/login",LoginUserController);
+router.post("/login",isLogin,LoginUserController);
 router.get("/logout", LogOut);
 router.get("/getuser", validateToken,getUser);
 

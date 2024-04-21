@@ -6,6 +6,8 @@ services:
     command: node --watch ./dist/server.js
     build: .
     restart: always
+    ports:
+      - ${PORT}:${PORT}
     env_file:
       - .env
     environment:
