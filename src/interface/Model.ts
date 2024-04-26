@@ -62,4 +62,5 @@ export interface PayLoadUser {
 export interface ResultInterface {
     jobID: ObjectId;
     userID : ObjectId;
+    datePrdict : Date;
 }

@@ -82,6 +82,11 @@ const Result = new Schema<ResultInterface>(
             type: Schema.Types.ObjectId,
             ref: "User"
         },
+        datePrdict : {
+            type: Date,
+            default: Date.now
+        },
+        
     }
 );
 
