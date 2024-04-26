@@ -9,33 +9,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addJob = void 0;
+exports.ResultPrediction = void 0;
 const AdminSchema_1 = require("../../../Model/AdminSchema");
-const UploadImage_1 = require("../../../utils/UploadImage");
-const addJob = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const UserSchema_1 = require("../../../Model/UserSchema");
+const mongoose_1 = require("mongoose");
+const ResultPrediction = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { data } = req.body;
-        const file = req.file;
-        if (!file) {
-            return res.status(400).json({ message: "Please upload a file" });
+        const reusult_id = new mongoose_1.mongo.ObjectId(req.params.result_id);
+        const result = yield UserSchema_1.ResultModel.findById(reusult_id);
+        if (!result) {
+            return res.status(404).json({ message: "Result not found" });
         }
-        const imageUrl = yield (0, UploadImage_1.uploadImageJob)(file);
-        const newData = JSON.parse(data);
-        const job = new AdminSchema_1.JobModel({
-            jobTitle: newData.jobTitle,
-            description: newData.description,
-            OneDayDo: newData.OneDayDo,
-            skills: newData.skills,
-            Image: imageUrl
-        });
-        yield job.save();
-        res.status(201).send({
-            message: "Job added successfully",
-            job
-        });
+        const job = yield AdminSchema_1.JobModel.findById(result.jobID);
+        res.status(200).json({ job });
     }
     catch (error) {
         console.log(error);
     }
 });
-exports.addJob = addJob;
+exports.ResultPrediction = ResultPrediction;

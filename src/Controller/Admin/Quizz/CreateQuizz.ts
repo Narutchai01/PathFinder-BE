@@ -4,47 +4,52 @@ import {
   WeightModel,
   ChoiseModel,
 } from "../../../Model/AdminSchema";
-
 import { uploadImageQuizz } from "../../../utils/UploadImage";
+import { ObjectId } from "mongoose";
 
 export const CreateQuizz = async (req: Request, res: Response) => {
   try {
     let { data } = req.body;
+    const file = req.file?.buffer;
     data = JSON.parse(data);
     const { quizzTitle, questions } = data;
-    const file = req.file;
-    if (!file) {
-      return res.status(400).json("Please upload a file");
-    }
-    const imageUrl = await uploadImageQuizz(file);
+    const ImageQuizz = await uploadImageQuizz(file);
     const quizz = new QuizzModel({
       quizzTitle,
-      ImageQuizz: imageUrl,
+      ImageQuizz,
     });
-    await quizz.save();
+    
 
-    const questionsData = await Promise.all(questions.map(async (question: any) => {  
-      const {title ,weight} = question;
-      const weightData = weight.map((item: any) => {
-      return new WeightModel({
-        jobID: item.jobID,
-        weight: item.weight,
+    const choises = await Promise.all(
+      questions.map(async (question: any) => {
+        const choise = new ChoiseModel({
+          answer: question.title,
+        });
+       const weight_id = Promise.all(
+          question.weight.map(async (weightData: any) => {
+            const { jobID, weight } = weightData;
+            const weightModel = new WeightModel({
+              jobID,
+              weight: weight,
+            });
+            weightModel.save();
+            return weightModel._id;
+          })
+        );
+        choise.weight = await weight_id;
+        return choise;
       })
-      });
-      await WeightModel.insertMany(weightData);
-      const weightID = weightData.map((item: any) => item._id);
-      return new ChoiseModel({
-      answer: title,
-      weight: weightID,
-      });
-    }));
+    );
 
-    await ChoiseModel.insertMany(questionsData);
-    quizz.choies = questionsData.map((item: any) => item._id);
+    const choise_id = choises.map((choise) => choise._id);
+
+    await ChoiseModel.insertMany(choises);
+    quizz.choies = choise_id;
     await quizz.save();
-    
-    
-    res.status(201).json("Quizz created successfully");
+
+    res.status(201).json({
+      message: "Quizz created successfully",
+    });
   } catch (error: any) {
     console.log(error.message);
   }

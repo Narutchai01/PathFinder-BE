@@ -25,7 +25,7 @@ export const addJob = async (req: Request, res: Response) => {
             job
         });
     } catch (error:any) {
-        console.log(error.message);
+        console.log(error);
         
     }
 };

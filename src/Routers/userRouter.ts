@@ -12,6 +12,8 @@ import { DeleletComment } from '../Controller/User/Post/DeleletComment';
 import { isLogin, validateToken } from '../middleware/auth';
 import { LogOut } from '../Controller/User/๊user/LogOut';
 import { Predict } from '../Controller/User/Quizz/Predict';
+import { GetResultPrediction } from '../Controller/User/Quizz/GetResultPrediction';
+import { GetResultPredictionByUserID } from '../Controller/User/Quizz/GetResultPredictionByUserID';
 
 const router = express.Router();
 
@@ -22,7 +24,7 @@ router.get("/", (req, res) => {
         message: "this is user router",
     });
 });
-router.post("/register",registerController);
+router.post("/register",isLogin,registerController);
 router.post("/login",isLogin,LoginUserController);
 router.get("/logout", LogOut);
 router.get("/getuser", validateToken,getUser);
@@ -38,7 +40,9 @@ router.delete("/post/deletecomment", DeleletComment)
 
 // Quizz Router
 router.get("/quizz/getquizz", GetQuizz);
-router.post("/quizz/predict",validateToken,Predict);
+router.post("/quizz/predict",Predict);
+router.get("/quizz/getresult/:reusult_id",GetResultPrediction);
+router.get("/quizz/getresultByUserID",GetResultPredictionByUserID)
 
 
 

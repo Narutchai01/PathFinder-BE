@@ -13,39 +13,40 @@ exports.CreateQuizz = void 0;
 const AdminSchema_1 = require("../../../Model/AdminSchema");
 const UploadImage_1 = require("../../../utils/UploadImage");
 const CreateQuizz = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     try {
         let { data } = req.body;
+        const file = (_a = req.file) === null || _a === void 0 ? void 0 : _a.buffer;
         data = JSON.parse(data);
         const { quizzTitle, questions } = data;
-        const file = req.file;
-        if (!file) {
-            return res.status(400).json("Please upload a file");
-        }
-        const imageUrl = yield (0, UploadImage_1.uploadImageQuizz)(file);
+        const ImageQuizz = yield (0, UploadImage_1.uploadImageQuizz)(file);
         const quizz = new AdminSchema_1.QuizzModel({
             quizzTitle,
-            ImageQuizz: imageUrl,
+            ImageQuizz,
         });
-        yield quizz.save();
-        const questionsData = yield Promise.all(questions.map((question) => __awaiter(void 0, void 0, void 0, function* () {
-            const { title, weight } = question;
-            const weightData = weight.map((item) => {
-                return new AdminSchema_1.WeightModel({
-                    jobID: item.jobID,
-                    weight: item.weight,
+        const choises = yield Promise.all(questions.map((question) => __awaiter(void 0, void 0, void 0, function* () {
+            const choise = new AdminSchema_1.ChoiseModel({
+                answer: question.title,
+            });
+            const weight_id = Promise.all(question.weight.map((weightData) => __awaiter(void 0, void 0, void 0, function* () {
+                const { jobID, weight } = weightData;
+                const weightModel = new AdminSchema_1.WeightModel({
+                    jobID,
+                    weight: weight,
                 });
-            });
-            yield AdminSchema_1.WeightModel.insertMany(weightData);
-            const weightID = weightData.map((item) => item._id);
-            return new AdminSchema_1.ChoiseModel({
-                answer: title,
-                weight: weightID,
-            });
+                weightModel.save();
+                return weightModel._id;
+            })));
+            choise.weight = yield weight_id;
+            return choise;
         })));
-        yield AdminSchema_1.ChoiseModel.insertMany(questionsData);
-        quizz.choies = questionsData.map((item) => item._id);
+        const choise_id = choises.map((choise) => choise._id);
+        yield AdminSchema_1.ChoiseModel.insertMany(choises);
+        quizz.choies = choise_id;
         yield quizz.save();
-        res.status(201).json("Quizz created successfully");
+        res.status(201).json({
+            message: "Quizz created successfully",
+        });
     }
     catch (error) {
         console.log(error.message);

@@ -7,16 +7,8 @@ import { ResultModel } from "../../../Model/UserSchema";
 export const Predict = async (req: Request, res: Response) => {
   try {
     const token = req.cookies.token;
-    if (!token) {
-      return res.status(401).json({ message: "Unauthorized" });
-    }
-    const validToken = jwt.verify(token, String(secret_jwt));
-    if (!validToken) {
-      return res.status(401).json({ message: "Unauthorized" });
-    }
-
-    const weightID: string[] = [];
     const { choiseARR } = req.body;
+    const weightID: string[] = [];
     const choise = await ChoiseModel.find({ _id: choiseARR }).populate(
       "weight"
     );
@@ -47,16 +39,27 @@ export const Predict = async (req: Request, res: Response) => {
       }
     }
 
-    const userID: any = (validToken as { UserID: any }).UserID;
-    const result = new ResultModel({
-      jobID: maxJobID,
-      userID: userID,
-    });
-    await result.save();
-    res.status(200).json({
-      message: "Predicted",
-      result : result._id
-    });
+    if (token) {
+      const validToken = jwt.verify(token, String(secret_jwt));
+      if (!validToken) {
+        return res.status(401).json({ message: "Unauthorized" });
+      }
+      const userID :any = (validToken as {UserID:any}).UserID;
+      const result = new ResultModel({
+        jobID : maxJobID,
+        userID : userID,
+      })
+      await result.save();
+      return res.status(200).json({ message: "Success" ,  result : result._id });
+    } else {
+      const result = new ResultModel({
+        userID : null,
+        jobID : maxJobID,
+      });
+      await result.save();
+      return res.status(200).json({ message: "Success" ,  result : result._id });
+    }
+
   } catch (error: any) {
     console.log(error.message);
   }

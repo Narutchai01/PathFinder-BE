@@ -20,15 +20,8 @@ const UserSchema_1 = require("../../../Model/UserSchema");
 const Predict = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const token = req.cookies.token;
-        if (!token) {
-            return res.status(401).json({ message: "Unauthorized" });
-        }
-        const validToken = jsonwebtoken_1.default.verify(token, String(config_1.secret_jwt));
-        if (!validToken) {
-            return res.status(401).json({ message: "Unauthorized" });
-        }
-        const weightID = [];
         const { choiseARR } = req.body;
+        const weightID = [];
         const choise = yield AdminSchema_1.ChoiseModel.find({ _id: choiseARR }).populate("weight");
         choise.map((item) => item.weight.map((item) => weightID.push(item._id)));
         const weight = yield AdminSchema_1.WeightModel.find({ _id: weightID });
@@ -52,16 +45,27 @@ const Predict = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 maxJobID = totalWeights[jobID].maxJobID;
             }
         }
-        const userID = validToken.UserID;
-        const result = new UserSchema_1.ResultModel({
-            jobID: maxJobID,
-            userID: userID,
-        });
-        yield result.save();
-        res.status(200).json({
-            message: "Predicted",
-            result: result._id
-        });
+        if (token) {
+            const validToken = jsonwebtoken_1.default.verify(token, String(config_1.secret_jwt));
+            if (!validToken) {
+                return res.status(401).json({ message: "Unauthorized" });
+            }
+            const userID = validToken.UserID;
+            const result = new UserSchema_1.ResultModel({
+                jobID: maxJobID,
+                userID: userID,
+            });
+            yield result.save();
+            return res.status(200).json({ message: "Success", result: result._id });
+        }
+        else {
+            const result = new UserSchema_1.ResultModel({
+                userID: null,
+                jobID: maxJobID,
+            });
+            yield result.save();
+            return res.status(200).json({ message: "Success", result: result._id });
+        }
     }
     catch (error) {
         console.log(error.message);
