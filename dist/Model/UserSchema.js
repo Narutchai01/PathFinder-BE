@@ -46,7 +46,11 @@ const Post = new mongoose_1.Schema({
         }
     ],
     PostImage: String,
-    descriptionPost: String
+    descriptionPost: String,
+    dateCreate: {
+        type: Date,
+        default: Date.now
+    }
 });
 exports.PostModel = (0, mongoose_1.model)("Post", Post);
 const Comment = new mongoose_1.Schema({
@@ -72,6 +76,10 @@ const Result = new mongoose_1.Schema({
     userID: {
         type: mongoose_1.Schema.Types.ObjectId,
         ref: "User"
+    },
+    datePrdict: {
+        type: Date,
+        default: Date.now
     },
 });
 exports.ResultModel = (0, mongoose_1.model)("Result", Result);

@@ -47,6 +47,7 @@ export interface PostInterface {
     Comments: ObjectId[];
     PostImage : string;
     descriptionPost : string;
+    dateCreate: Date;
 }
 
 export interface CommentInterface {

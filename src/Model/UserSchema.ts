@@ -49,7 +49,11 @@ const Post = new Schema<PostInterface>({
         }
     ],
     PostImage : String,
-    descriptionPost : String
+    descriptionPost : String,
+    dateCreate : {
+        type: Date,
+        default: Date.now
+    }
 });
 
 export const PostModel = model("Post", Post);

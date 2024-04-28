@@ -20,6 +20,9 @@ const CreateComment = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     try {
         const { comment, PostID } = req.body;
         const token = req.cookies.token;
+        if (!token) {
+            return res.status(400).send("Invalid Token");
+        }
         const validToken = jsonwebtoken_1.default.verify(token, String(config_1.secret_jwt));
         if (!validToken) {
             return res.status(400).send("Invalid Token");
@@ -30,11 +33,11 @@ const CreateComment = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             PostID,
             OwnerID,
         });
-        yield newComment.save();
         const findPost = yield UserSchema_1.PostModel.findById(PostID);
         if (!findPost) {
             return res.status(404).send("Post not found");
         }
+        yield newComment.save();
         yield (findPost === null || findPost === void 0 ? void 0 : findPost.updateOne({ $push: { Comments: newComment._id } }));
         res.status(201).send("Comment created successfully!");
     }
