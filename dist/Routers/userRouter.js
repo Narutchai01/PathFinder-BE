@@ -19,6 +19,7 @@ const LogOut_1 = require("../Controller/User/\u0E4Auser/LogOut");
 const Predict_1 = require("../Controller/User/Quizz/Predict");
 const GetResultPrediction_1 = require("../Controller/User/Quizz/GetResultPrediction");
 const GetResultPredictionByUserID_1 = require("../Controller/User/Quizz/GetResultPredictionByUserID");
+const GetUserByUserID_1 = require("../Controller/User/\u0E4Auser/GetUserByUserID");
 const router = express_1.default.Router();
 router.get("/", (req, res) => {
     res.send({
@@ -29,6 +30,7 @@ router.post("/register", auth_1.isLogin, RegisterController_1.registerController
 router.post("/login", auth_1.isLogin, LoginUserController_1.LoginUserController);
 router.get("/logout", LogOut_1.LogOut);
 router.get("/getuser", auth_1.validateToken, Getuser_1.getUser);
+router.get("/getuserbyid", auth_1.validateToken, GetUserByUserID_1.getUserByUserID);
 // Post Router
 router.post("/post/createpost", CreatePost_1.CreatePost);
 router.post("/post/createcomment", CreateComment_1.CreateComment);

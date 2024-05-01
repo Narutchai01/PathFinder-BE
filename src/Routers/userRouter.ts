@@ -14,6 +14,7 @@ import { LogOut } from '../Controller/User/๊user/LogOut';
 import { Predict } from '../Controller/User/Quizz/Predict';
 import { GetResultPrediction } from '../Controller/User/Quizz/GetResultPrediction';
 import { GetResultPredictionByUserID } from '../Controller/User/Quizz/GetResultPredictionByUserID';
+import { getUserByUserID } from '../Controller/User/๊user/GetUserByUserID';
 
 const router = express.Router();
 
@@ -28,6 +29,7 @@ router.post("/register",isLogin,registerController);
 router.post("/login",isLogin,LoginUserController);
 router.get("/logout", LogOut);
 router.get("/getuser", validateToken,getUser);
+router.get("/getuserbyid", validateToken,getUserByUserID);
 
 // Post Router
 router.post("/post/createpost", CreatePost);
