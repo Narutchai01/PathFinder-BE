@@ -20,20 +20,24 @@ const getUserByUserID = (req, res) => __awaiter(void 0, void 0, void 0, function
     try {
         const token = req.cookies.token;
         if (!token) {
-            res.status(401).json({ message: "Unauthorized" });
+            res.json({ message: "Unauthorized" });
+            return false;
         }
         const validToken = jsonwebtoken_1.default.verify(token, String(config_1.secret_jwt));
         if (!validToken) {
-            res.status(401).json({ message: "Unauthorized" });
+            res.json({ message: "Unauthorized" });
+            return false;
         }
         const UserID = validToken.UserID;
         const user = yield UserSchema_1.UserModel.findById(UserID);
         if (!user) {
-            res.status(404).json({ message: "User not found" });
+            res.json({ message: "User not found" });
+            return false;
         }
         res.status(200).json(user);
     }
     catch (error) {
+        res.status(500).json({ message: "Internal Server Error" });
         console.log(error.message);
     }
 });

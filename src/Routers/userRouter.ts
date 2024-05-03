@@ -26,10 +26,10 @@ router.get("/", (req, res) => {
     });
 });
 router.post("/register",isLogin,registerController);
-router.post("/login",isLogin,LoginUserController);
-router.get("/logout", LogOut);
+router.post("/login",LoginUserController);
+router.post("/logout", LogOut);
 router.get("/getuser", validateToken,getUser);
-router.get("/getuserbyid", validateToken,getUserByUserID);
+router.get("/getuserbyid",getUserByUserID);
 
 // Post Router
 router.post("/post/createpost", CreatePost);

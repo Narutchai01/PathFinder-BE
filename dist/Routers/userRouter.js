@@ -27,10 +27,10 @@ router.get("/", (req, res) => {
     });
 });
 router.post("/register", auth_1.isLogin, RegisterController_1.registerController);
-router.post("/login", auth_1.isLogin, LoginUserController_1.LoginUserController);
-router.get("/logout", LogOut_1.LogOut);
+router.post("/login", LoginUserController_1.LoginUserController);
+router.post("/logout", LogOut_1.LogOut);
 router.get("/getuser", auth_1.validateToken, Getuser_1.getUser);
-router.get("/getuserbyid", auth_1.validateToken, GetUserByUserID_1.getUserByUserID);
+router.get("/getuserbyid", GetUserByUserID_1.getUserByUserID);
 // Post Router
 router.post("/post/createpost", CreatePost_1.CreatePost);
 router.post("/post/createcomment", CreateComment_1.CreateComment);

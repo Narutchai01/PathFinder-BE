@@ -8,22 +8,26 @@ export const getUserByUserID = async (req:Request,res:Response) => {
     try {
         const token = req.cookies.token;
         if (!token) {
-            res.status(401).json({message:"Unauthorized"});
+            res.json({message:"Unauthorized"});
+            return false;
         }
         const validToken = jwt.verify(token,String(secret_jwt));
         if (!validToken) {
-            res.status(401).json({message:"Unauthorized"});
+            res.json({message:"Unauthorized"});
+            return false;
         }
 
         const UserID = (validToken as {UserID:any}).UserID;
 
         const user = await UserModel.findById(UserID);
         if (!user) {
-            res.status(404).json({message:"User not found"});
+            res.json({message:"User not found"});
+            return false;
         }
 
         res.status(200).json(user);
     } catch (error:any) {
+        res.status(500).json({message:"Internal Server Error"});
         console.log(error.message);
     }
 };
