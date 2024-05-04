@@ -8,10 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.registerController = void 0;
 const UserSchema_1 = require("../../../Model/UserSchema");
 const PasswordManager_1 = require("../../../utils/PasswordManager");
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const config_1 = require("../../../config/config");
 const registerController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { username, password, email, firstname, lastname, school, education_level, birhDate, } = req.body;
@@ -26,6 +31,8 @@ const registerController = (req, res) => __awaiter(void 0, void 0, void 0, funct
             birhDate,
         });
         yield user.save();
+        const playload = jsonwebtoken_1.default.sign({ UserID: user._id }, String(config_1.secret_jwt), { algorithm: "HS256" });
+        res.cookie("token", playload, { httpOnly: true });
         res.status(200).send({
             message: "User created successfully",
             user,

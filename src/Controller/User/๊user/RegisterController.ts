@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { UserModel } from "../../../Model/UserSchema";
 import { hashPassword } from "../../../utils/PasswordManager";
+import jwt from "jsonwebtoken";
+import { secret_jwt } from "../../../config/config";
 
 export const registerController = async (req: Request, res: Response) => {
   try {
@@ -25,6 +27,12 @@ export const registerController = async (req: Request, res: Response) => {
       birhDate,
     });
     await user.save();
+
+
+    const playload = jwt.sign({UserID : user._id},String(secret_jwt),{algorithm : "HS256"});
+    
+
+    res.cookie("token",playload,{httpOnly : true});
     res.status(200).send({
       message: "User created successfully",
       user,
