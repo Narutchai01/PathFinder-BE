@@ -95,3 +95,18 @@ const Result = new Schema<ResultInterface>(
 );
 
 export const ResultModel = model("Result", Result);
+
+
+const Recovery = new Schema({
+    OTP : {
+        type: String,
+        required: true
+    },
+    dateCreate : {
+        type: Date,
+        default: Date.now
+    }
+});
+
+
+export const RecoveryModel = model("Recovery", Recovery);

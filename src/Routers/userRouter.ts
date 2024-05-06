@@ -15,6 +15,9 @@ import { Predict } from '../Controller/User/Quizz/Predict';
 import { GetResultPrediction } from '../Controller/User/Quizz/GetResultPrediction';
 import { GetResultPredictionByUserID } from '../Controller/User/Quizz/GetResultPredictionByUserID';
 import { getUserByUserID } from '../Controller/User/๊user/GetUserByUserID';
+import { forgetPasswordSendEmail } from '../Controller/User/๊user/ForgetpasswordSendEmail';
+import { VerifyOTP } from '../Controller/User/๊user/VerifyOTP';
+import { ChagePassWordByForgetpassword } from '../Controller/User/๊user/ChagePassWordByForgetpassword';
 
 const router = express.Router();
 
@@ -30,6 +33,9 @@ router.post("/login",LoginUserController);
 router.post("/logout", LogOut);
 router.get("/getuser", validateToken,getUser);
 router.get("/getuserbyid",getUserByUserID);
+router.post("/sendemail", forgetPasswordSendEmail);
+router.post("/verifyotp", VerifyOTP);
+router.put("/changepassword", ChagePassWordByForgetpassword);
 
 // Post Router
 router.post("/post/createpost", CreatePost);

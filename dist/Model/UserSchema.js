@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ResultModel = exports.CommentModel = exports.PostModel = exports.UserModel = void 0;
+exports.RecoveryModel = exports.ResultModel = exports.CommentModel = exports.PostModel = exports.UserModel = void 0;
 const mongoose_1 = require("mongoose");
 const User = new mongoose_1.Schema({
     username: {
@@ -83,3 +83,14 @@ const Result = new mongoose_1.Schema({
     },
 });
 exports.ResultModel = (0, mongoose_1.model)("Result", Result);
+const Recovery = new mongoose_1.Schema({
+    OTP: {
+        type: String,
+        required: true
+    },
+    dateCreate: {
+        type: Date,
+        default: Date.now
+    }
+});
+exports.RecoveryModel = (0, mongoose_1.model)("Recovery", Recovery);

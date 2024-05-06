@@ -20,6 +20,9 @@ const Predict_1 = require("../Controller/User/Quizz/Predict");
 const GetResultPrediction_1 = require("../Controller/User/Quizz/GetResultPrediction");
 const GetResultPredictionByUserID_1 = require("../Controller/User/Quizz/GetResultPredictionByUserID");
 const GetUserByUserID_1 = require("../Controller/User/\u0E4Auser/GetUserByUserID");
+const ForgetpasswordSendEmail_1 = require("../Controller/User/\u0E4Auser/ForgetpasswordSendEmail");
+const VerifyOTP_1 = require("../Controller/User/\u0E4Auser/VerifyOTP");
+const ChagePassWordByForgetpassword_1 = require("../Controller/User/\u0E4Auser/ChagePassWordByForgetpassword");
 const router = express_1.default.Router();
 router.get("/", (req, res) => {
     res.send({
@@ -31,6 +34,9 @@ router.post("/login", LoginUserController_1.LoginUserController);
 router.post("/logout", LogOut_1.LogOut);
 router.get("/getuser", auth_1.validateToken, Getuser_1.getUser);
 router.get("/getuserbyid", GetUserByUserID_1.getUserByUserID);
+router.post("/sendemail", ForgetpasswordSendEmail_1.forgetPasswordSendEmail);
+router.post("/verifyotp", VerifyOTP_1.VerifyOTP);
+router.put("/changepassword", ChagePassWordByForgetpassword_1.ChagePassWordByForgetpassword);
 // Post Router
 router.post("/post/createpost", CreatePost_1.CreatePost);
 router.post("/post/createcomment", CreateComment_1.CreateComment);
