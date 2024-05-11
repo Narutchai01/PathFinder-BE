@@ -35,7 +35,7 @@ router.get("/getuser", validateToken,getUser);
 router.get("/getuserbyid",getUserByUserID);
 router.post("/sendemail", forgetPasswordSendEmail);
 router.post("/verifyotp", VerifyOTP);
-router.put("/changepassword", ChagePassWordByForgetpassword);
+router.put("/changepasswordbyopt", ChagePassWordByForgetpassword);
 
 // Post Router
 router.post("/post/createpost", CreatePost);
