@@ -36,7 +36,7 @@ router.get("/getuser", auth_1.validateToken, Getuser_1.getUser);
 router.get("/getuserbyid", GetUserByUserID_1.getUserByUserID);
 router.post("/sendemail", ForgetpasswordSendEmail_1.forgetPasswordSendEmail);
 router.post("/verifyotp", VerifyOTP_1.VerifyOTP);
-router.put("/changepassword", ChagePassWordByForgetpassword_1.ChagePassWordByForgetpassword);
+router.put("/changepasswordbyopt", ChagePassWordByForgetpassword_1.ChagePassWordByForgetpassword);
 // Post Router
 router.post("/post/createpost", CreatePost_1.CreatePost);
 router.post("/post/createcomment", CreateComment_1.CreateComment);
