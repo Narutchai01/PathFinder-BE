@@ -29,7 +29,7 @@ router.get("/", (req, res) => {
         message: "this is user router",
     });
 });
-router.post("/register", auth_1.isLogin, RegisterController_1.registerController);
+router.post("/register", RegisterController_1.registerController);
 router.post("/login", LoginUserController_1.LoginUserController);
 router.post("/logout", LogOut_1.LogOut);
 router.get("/getuser", auth_1.validateToken, Getuser_1.getUser);

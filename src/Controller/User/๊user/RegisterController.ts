@@ -30,8 +30,6 @@ export const registerController = async (req: Request, res: Response) => {
 
 
     const playload = jwt.sign({UserID : user._id},String(secret_jwt),{algorithm : "HS256"});
-    
-
     res.cookie("token",playload,{httpOnly : true});
     res.status(200).send({
       message: "User created successfully",

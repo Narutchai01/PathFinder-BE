@@ -28,7 +28,7 @@ router.get("/", (req, res) => {
         message: "this is user router",
     });
 });
-router.post("/register",isLogin,registerController);
+router.post("/register",registerController);
 router.post("/login",LoginUserController);
 router.post("/logout", LogOut);
 router.get("/getuser", validateToken,getUser);
