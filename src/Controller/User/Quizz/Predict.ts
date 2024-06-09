@@ -38,7 +38,6 @@ export const Predict = async (req: Request, res: Response) => {
         maxJobID = totalWeights[jobID].maxJobID;
       }
     }
-
     if (token) {
       const validToken = jwt.verify(token, String(secret_jwt));
       if (!validToken) {
@@ -59,7 +58,6 @@ export const Predict = async (req: Request, res: Response) => {
       await result.save();
       return res.status(200).json({ message: "Success" ,  result : result._id });
     }
-
   } catch (error: any) {
     console.log(error.message);
   }

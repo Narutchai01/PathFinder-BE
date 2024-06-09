@@ -23,6 +23,9 @@ const GetUserByUserID_1 = require("../Controller/User/\u0E4Auser/GetUserByUserID
 const ForgetpasswordSendEmail_1 = require("../Controller/User/\u0E4Auser/ForgetpasswordSendEmail");
 const VerifyOTP_1 = require("../Controller/User/\u0E4Auser/VerifyOTP");
 const ChagePassWordByForgetpassword_1 = require("../Controller/User/\u0E4Auser/ChagePassWordByForgetpassword");
+const CheckOwner_1 = require("../Controller/User/Post/CheckOwner");
+const UpdatePost_1 = require("../Controller/User/Post/UpdatePost");
+const EditProfile_1 = require("../Controller/User/\u0E4Auser/EditProfile");
 const router = express_1.default.Router();
 router.get("/", (req, res) => {
     res.send({
@@ -37,6 +40,7 @@ router.get("/getuserbyid", GetUserByUserID_1.getUserByUserID);
 router.post("/sendemail", ForgetpasswordSendEmail_1.forgetPasswordSendEmail);
 router.post("/verifyotp", VerifyOTP_1.VerifyOTP);
 router.put("/changepasswordbyopt", ChagePassWordByForgetpassword_1.ChagePassWordByForgetpassword);
+router.put("/editprofile", EditProfile_1.EditProfile);
 // Post Router
 router.post("/post/createpost", CreatePost_1.CreatePost);
 router.post("/post/createcomment", CreateComment_1.CreateComment);
@@ -44,6 +48,8 @@ router.get("/post/getpost", GetPost_1.GetPost);
 router.get("/post/getpostbyid", GetPostByPostID_1.GetPostByPostID);
 router.delete("/post/deletepost", DeleletPost_1.DeleletPost);
 router.delete("/post/deletecomment", DeleletComment_1.DeleletComment);
+router.get("/post/checkowner/:postID", CheckOwner_1.CheckOwner);
+router.put("/post/updatepost/:Postid", UpdatePost_1.UpdatePost);
 // Quizz Router
 router.get("/quizz/getquizz", GetQuizz_1.GetQuizz);
 router.post("/quizz/predict", Predict_1.Predict);

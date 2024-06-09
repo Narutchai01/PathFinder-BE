@@ -18,6 +18,9 @@ import { getUserByUserID } from '../Controller/User/๊user/GetUserByUserID';
 import { forgetPasswordSendEmail } from '../Controller/User/๊user/ForgetpasswordSendEmail';
 import { VerifyOTP } from '../Controller/User/๊user/VerifyOTP';
 import { ChagePassWordByForgetpassword } from '../Controller/User/๊user/ChagePassWordByForgetpassword';
+import { CheckOwner } from '../Controller/User/Post/CheckOwner';
+import { UpdatePost } from '../Controller/User/Post/UpdatePost';
+import { EditProfile } from '../Controller/User/๊user/EditProfile';
 
 const router = express.Router();
 
@@ -36,6 +39,7 @@ router.get("/getuserbyid",getUserByUserID);
 router.post("/sendemail", forgetPasswordSendEmail);
 router.post("/verifyotp", VerifyOTP);
 router.put("/changepasswordbyopt", ChagePassWordByForgetpassword);
+router.put("/editprofile", EditProfile);
 
 // Post Router
 router.post("/post/createpost", CreatePost);
@@ -44,6 +48,8 @@ router.get("/post/getpost", GetPost)
 router.get("/post/getpostbyid", GetPostByPostID)
 router.delete("/post/deletepost", DeleletPost)
 router.delete("/post/deletecomment", DeleletComment)
+router.get("/post/checkowner/:postID", CheckOwner);
+router.put("/post/updatepost/:Postid", UpdatePost);
 
 
 // Quizz Router
